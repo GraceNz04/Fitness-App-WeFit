@@ -21,5 +21,6 @@ from fitness_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(("fitness_app.urls", "fitness_app"), "fitness_app")),
-    path("", views.registration, name='registration')
+    path("", views.registration, name='registration'),
+    path('fitness_app/', include('fitness_app.urls')),
 ]

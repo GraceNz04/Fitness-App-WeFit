@@ -10,7 +10,6 @@ class User(models.Model):
     gender = models.CharField(max_length=40)
     weight = models.FloatField()
     height = models.FloatField()
-    dob = models.DateField()
     password = models.CharField(max_length=255, default='1234')
     def clean(self) -> None:
         today = datetime.date.today()
@@ -23,17 +22,33 @@ class User(models.Model):
     def save(self, *args, **kwargs) -> None:
         self.clean()
         return super().save(*args, **kwargs)
-    
+
+
+        
+class Category(models.Model):
+    name = models.CharField(max_length=300)
+    description = models.CharField(max_length=400)  
+
+class Workout(models.Model):
+    name = models.CharField(max_length=300)
+    description = models.CharField(max_length=400)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='workouts')
+
 class Exercise(models.Model):
     name = models.CharField(max_length=300)
     category = models.CharField(max_length=100)
-    duration = models.IntegerField(default=20)
+    duration = models.IntegerField(help_text="Duration in minutes")
+    video_url = models.URLField(default='https://example.com/default-video-url')
     description = models.TextField(blank=True)
-    demonstration = models.FileField()
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name='exercises')
     
+
 class UserExercise(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-        
-    
+
+
+
+
+
 
