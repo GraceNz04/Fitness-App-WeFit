@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-import datetime
 
 # Create your models here.
 
@@ -10,30 +9,32 @@ class User(models.Model):
     gender = models.CharField(max_length=40)
     weight = models.FloatField()
     height = models.FloatField()
-    dob = models.DateField()
+    role = models.CharField(max_length=30, default='user')
     password = models.CharField(max_length=255, default='1234')
-    def clean(self) -> None:
-        today = datetime.date.today()
-        if self.dob == today:
-            raise ValidationError("Your birth date can not be today!")
-        elif self.dob > today:
-            raise ValidationError('Your birth date is impossible!')
-        return super().clean()
-    
-    def save(self, *args, **kwargs) -> None:
-        self.clean()
-        return super().save(*args, **kwargs)
-    
+    class Meta:
+        db_table = 'users'     
+        
+class Workout(models.Model):
+    title = models.CharField(max_length=100)    
+        
 class Exercise(models.Model):
-    name = models.CharField(max_length=300)
-    category = models.CharField(max_length=100)
-    duration = models.IntegerField(default=20)
+    exercise_name = models.CharField(max_length=300)
+    duration = models.IntegerField(help_text="Duration in seconds")
     description = models.TextField(blank=True)
-    demonstration = models.FileField()
+    video_url = models.FileField(upload_to='uploads')
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'exercise'  
     
 class UserExercise(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-        
-    
+    exercise_name = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    record = models.IntegerField(default='0')
+    class Meta:
+        db_table = 'user_exercise'  
+
+
+
+
+
 
