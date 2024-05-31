@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ workout.name }}</h1>
+<p>{{ workout.description }}</p>
+<a href="{% url 'workout_update' workout.pk %}" class="button">Edit</a>
+<a href="{% url 'workout_delete' workout.pk %}" class="button">Delete</a>
+{% endblock %}

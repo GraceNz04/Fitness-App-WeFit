@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>EXERCISES</h1>
+            </div>
+            <div class="card-button">
+                <a href="/exercise">Create New Exercise</a>
+            </div>
+            <div class="card body">
+                <table border="1">
+                    <thead>
+                        <th>Exercie ID</th>
+                        <th>Name</th>
+                        <th>Duration</th>
+                        <th>Description</th>
+                        <th>Video_URL</th>
+                        <th>Workout</th>
+                        <th>Actions</th> 
+                    </thead>
+                    <tbody>
+                        {% for result in data%}
+                        <tr>
+                            <td>{{result.exercise_id}}</td>
+                            <td>{{result.exercise_name}}</td>
+                            <td>{{result.duration}}</td>
+                            <td>{{result.description}}</td>
+                            <td>{{result.video_url}}</td>
+                            <td>{{result.workout}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

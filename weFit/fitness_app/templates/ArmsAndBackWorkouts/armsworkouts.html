@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ workout.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .video-container {
+            margin: 20px 0;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ category.name }} java</h1>
+        <p>{{ category.description }} jav</p>
+        
+        <h2>{{ workout.name }} jav </h2>
+        <p>{{ workout.description }}</p>
+        
+        <h3>{{ exercise.name }}</h3>
+        
+        <p>{{ exercise.description }}</p>
+        <div class="video-container">
+            <iframe src="https://media.giphy.com/media/DhLSLn2viveFn58iRH/giphy.gif?cid=790b7611nedd3ai2v16ox5dweu8b8jt7eqc88vlmy2njwsdf&ep=v1_gifs_search&rid=giphy.gif&ct=g" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p><strong>Duration:</strong> {{ exercise.duration }} minutes</p>
+       
+    </div>
+</body>
+</html>
